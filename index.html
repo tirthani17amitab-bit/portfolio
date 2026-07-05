@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amitab Tirthani | Finance & Compliance</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e45;
+    --gold: #b8965a;
+    --gold-light: #d4b07a;
+    --cream: #f5f0e8;
+    --cream-dark: #e8e0d0;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,27,42,0.97);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    border-bottom: 1px solid rgba(184,150,90,0.25);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(184,150,90,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-lines {
+    position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px),
+                      repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 60px);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 5vw 80px 8vw;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 78px);
+    font-weight: 300; line-height: 1.05;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .hero-name span { color: var(--gold); font-weight: 500; }
+  .hero-title {
+    font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-bottom: 36px;
+  }
+  .hero-desc {
+    font-size: 15px; color: rgba(255,255,255,0.6);
+    max-width: 420px; line-height: 1.8; margin-bottom: 48px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; padding: 14px 32px;
+    font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--navy); }
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: flex-end; padding: 80px 8vw 80px 4vw;
+    position: relative; z-index: 2;
+  }
+  .hero-contact-card {
+    border: 1px solid rgba(184,150,90,0.3);
+    padding: 40px; background: rgba(255,255,255,0.03);
+    width: 100%; max-width: 340px;
+  }
+  .contact-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 20px; color: rgba(255,255,255,0.7); font-size: 14px;
+  }
+  .contact-icon {
+    width: 32px; height: 32px; border: 1px solid rgba(184,150,90,0.4);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 12px; color: var(--gold);
+  }
+  .contact-item a { color: inherit; text-decoration: none; }
+  .contact-item a:hover { color: var(--gold-light); }
+
+  /* SECTION SHARED */
+  section { padding: 100px 8vw; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--gold); opacity: 0.3; max-width: 60px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400; line-height: 1.1;
+    color: var(--navy); margin-bottom: 56px;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--white); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .skill-card {
+    padding: 36px 32px;
+    border: 1px solid var(--cream-dark);
+    background: var(--white);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.3s;
+  }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { background: #fdfaf6; }
+  .skill-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300; color: var(--cream-dark);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .skill-name {
+    font-size: 14px; font-weight: 500; color: var(--navy);
+    margin-bottom: 8px; letter-spacing: 0.02em;
+  }
+  .skill-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* EXPERTISE STRIP */
+  .expertise-strip {
+    background: var(--navy);
+    padding: 60px 8vw;
+    display: flex; gap: 48px; flex-wrap: wrap; align-items: center;
+  }
+  .strip-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--white); flex: 1; min-width: 200px;
+    font-weight: 300;
+  }
+  .strip-tags { display: flex; flex-wrap: wrap; gap: 10px; flex: 3; }
+  .strip-tag {
+    padding: 8px 18px; border: 1px solid rgba(184,150,90,0.35);
+    font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* TOOLS */
+  .tools-section { background: var(--cream); }
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+  }
+  .tool-chip {
+    border: 1px solid var(--cream-dark);
+    background: var(--white); padding: 20px 12px;
+    text-align: center; font-size: 13px; font-weight: 500;
+    color: var(--navy-mid); transition: all 0.25s;
+    letter-spacing: 0.02em;
+  }
+  .tool-chip:hover {
+    border-color: var(--gold); background: var(--navy);
+    color: var(--gold-light);
+  }
+
+  /* ABOUT */
+  .about-section {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  .about-text { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.9; }
+  .about-text .section-title { color: var(--white); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .stat-box {
+    border: 1px solid rgba(184,150,90,0.25);
+    padding: 28px 24px;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px; font-weight: 300; color: var(--gold); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* EDUCATION */
+  .education-section { background: var(--white); }
+  .edu-card {
+    border: 1px solid var(--cream-dark);
+    padding: 40px 44px;
+    display: grid; grid-template-columns: auto 1fr; gap: 32px;
+    align-items: start; margin-bottom: 20px;
+    transition: border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--gold); transform: scaleY(0);
+    transform-origin: top; transition: transform 0.3s;
+  }
+  .edu-card:hover::before { transform: scaleY(1); }
+  .edu-card:hover { border-color: var(--gold-light); }
+  .edu-icon {
+    width: 56px; height: 56px;
+    border: 1px solid var(--cream-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--gold); font-weight: 500;
+    flex-shrink: 0;
+  }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 500; color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .edu-school { font-size: 14px; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 10px; }
+  .edu-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .edu-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .edu-tag {
+    font-size: 11px; letter-spacing: 0.06em; padding: 4px 12px;
+    border: 1px solid var(--cream-dark); color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  .contact-section { background: var(--cream); text-align: center; padding: 100px 8vw; }
+  .contact-section .section-label { justify-content: center; }
+  .contact-section .section-label::after { display: none; }
+  .contact-section .section-label::before { content: ''; width: 60px; height: 1px; background: var(--gold); opacity: 0.3; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px; }
+  .contact-box {
+    border: 1px solid var(--cream-dark); background: var(--white);
+    padding: 32px 20px; transition: all 0.25s; text-decoration: none;
+    display: block; color: inherit;
+  }
+  .contact-box:hover { border-color: var(--gold); }
+  .contact-box-icon { font-size: 22px; margin-bottom: 12px; }
+  .contact-box-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-box-val { font-size: 13px; color: var(--text-muted); word-break: break-all; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 32px 8vw;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(184,150,90,0.15);
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); font-weight: 400; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s ease both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-name    { animation-delay: 0.2s; }
+  .hero-title   { animation-delay: 0.3s; }
+  .hero-desc    { animation-delay: 0.4s; }
+  .hero-cta     { animation-delay: 0.5s; }
+  .hero-contact-card { animation: fadeUp 0.7s 0.35s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 6vw 80px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .tools-grid { grid-template-columns: repeat(3, 1fr); }
+    .about-section { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .expertise-strip { flex-direction: column; gap: 24px; }
+  }
+  @media (max-width: 580px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 5vw; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">A. Tirthani</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Driving Financial Excellence</div>
+    <h1 class="hero-name">Amitab<br><span>Tirthani</span></h1>
+    <div class="hero-title">Finance &amp; Compliance Assistant</div>
+    <p class="hero-desc">A detail-driven finance professional specialising in regulatory compliance, financial reporting, and data-led decision making across fast-paced environments.</p>
+    <a href="#contact" class="hero-cta">Get in Touch →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-contact-card">
+      <div class="contact-label">Contact Details</div>
+      <div class="contact-item">
+        <div class="contact-icon">☎</div>
+        <div><a href="tel:+4407767941402">+44 07767 941 402</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div><a href="/cdn-cgi/l/email-protection#86f2eff4f2eee7e8efb7b1e7ebeff2e7e4c6e1ebe7efeaa8e5e9eb"><span class="__cf_email__" data-cfemail="7a0e13080e121b14134b4d1b17130e1b183a1d171b131654191517">[email&#160;protected]</span></a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">in</div>
+        <div><a href="https://www.linkedin.com/in/amitab-tirthani-57a934150/" target="_blank">LinkedIn Profile</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2 class="section-title">What I Bring<br>to the Table</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-number">01</div>
+      <div class="skill-name">Financial Reporting &amp; Planning</div>
+      <div class="skill-desc">Budgeting, forecasting, cash flow management, and accurate financial reporting.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">02</div>
+      <div class="skill-name">Payroll &amp; Accounts Control</div>
+      <div class="skill-desc">Payroll administration, accounts payable/receivable, and ledger reconciliation.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">03</div>
+      <div class="skill-name">Regulatory Compliance</div>
+      <div class="skill-desc">Audit support, internal controls, documentation management, and risk assessment.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">04</div>
+      <div class="skill-name">Tax &amp; VAT Compliance</div>
+      <div class="skill-desc">Tax filing, VAT returns, financial risk assessment, and control implementation.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">05</div>
+      <div class="skill-name">Data &amp; Financial Modelling</div>
+      <div class="skill-desc">SQL and Python for data extraction, analysis, and financial modelling.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">06</div>
+      <div class="skill-name">Strategic &amp; Analytical Thinking</div>
+      <div class="skill-desc">Strong problem-solving, communication, and adaptability in compliance-driven environments.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-number">07</div>
+      <div class="skill-name">AI in Finance</div>
+      <div class="skill-desc">Leveraging AI and machine learning to automate compliance, enhance financial modelling, and support data-driven decisions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE STRIP -->
+<div class="expertise-strip">
+  <div class="strip-title">Key Areas of Expertise</div>
+  <div class="strip-tags">
+    <span class="strip-tag">Financial Reporting</span>
+    <span class="strip-tag">Budgeting</span>
+    <span class="strip-tag">Forecasting</span>
+    <span class="strip-tag">VAT Compliance</span>
+    <span class="strip-tag">Audit Support</span>
+    <span class="strip-tag">Internal Controls</span>
+    <span class="strip-tag">Cash Flow</span>
+    <span class="strip-tag">Payroll</span>
+    <span class="strip-tag">Risk Assessment</span>
+    <span class="strip-tag">SQL</span>
+    <span class="strip-tag">Python</span>
+    <span class="strip-tag">AI in Finance</span>
+    <span class="strip-tag">Machine Learning</span>
+    <span class="strip-tag">FinTech</span>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section class="tools-section" id="tools">
+  <div class="section-label">Software &amp; Systems</div>
+  <h2 class="section-title">Tools I Work With</h2>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px;">
+    <span style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); padding:5px 14px; border:1px solid rgba(184,150,90,0.4);">Accounting</span>
+    <span style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); padding:5px 14px; border:1px solid rgba(184,150,90,0.4);">ERP & Cloud</span>
+    <span style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); padding:5px 14px; border:1px solid rgba(184,150,90,0.4);">Data & Analytics</span>
+    <span style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); padding:5px 14px; border:1px solid rgba(184,150,90,0.4);">AI & Automation</span>
+    <span style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); padding:5px 14px; border:1px solid rgba(184,150,90,0.4);">Productivity</span>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-chip">Sage Intacct</div>
+    <div class="tool-chip">Xero</div>
+    <div class="tool-chip">QuickBooks Online</div>
+    <div class="tool-chip">NetSuite ERP</div>
+    <div class="tool-chip">SAP S/4HANA</div>
+    <div class="tool-chip">Oracle Financials</div>
+    <div class="tool-chip">Advanced Excel</div>
+    <div class="tool-chip">Power BI</div>
+    <div class="tool-chip">SQL</div>
+    <div class="tool-chip">Python</div>
+    <div class="tool-chip">BlackLine</div>
+    <div class="tool-chip">Microsoft Copilot</div>
+    <div class="tool-chip">ChatGPT / AI Tools</div>
+    <div class="tool-chip">SharePoint</div>
+    <div class="tool-chip">Microsoft Teams</div>
+    <div class="tool-chip">MS Office 365</div>
+    <div class="tool-chip">Zoho Books</div>
+    <div class="tool-chip">Tableau</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-text">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Finance Professional<br>with Purpose</h2>
+    <p>I am a dedicated Finance and Compliance Assistant with a strong foundation in financial operations, regulatory frameworks, and data-driven analysis. I thrive in fast-paced, compliance-driven environments where accuracy and strategic thinking are essential.</p>
+    <br>
+    <p>My experience spans financial reporting, payroll administration, tax compliance, and audit support — combined with technical proficiency in SQL, Python, and industry-leading accounting platforms.</p>
+    <br>
+    <p>I am also deeply passionate about the intersection of <strong style="color:var(--gold-light)">Artificial Intelligence and Finance</strong>. I actively explore how AI and machine learning tools can enhance financial modelling, automate compliance workflows, detect anomalies in financial data, and support smarter, faster decision-making — bringing the future of FinTech into everyday financial operations.</p>
+  </div>
+  <div class="about-stats">
+    <div class="stat-box">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Accounting Platforms</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Programming Languages</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">360°</div>
+      <div class="stat-label">Finance Coverage</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Compliance Focused</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education-section" id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education &amp;<br>Qualifications</h2>
+
+  <div class="edu-card">
+    <div class="edu-icon">MSc</div>
+    <div>
+      <div class="edu-degree">Master's in FinTech &amp; Financial Markets</div>
+      <div class="edu-school">Postgraduate — Master of Science</div>
+      <div class="edu-desc">An advanced programme bridging the worlds of finance, technology, and markets. Covering algorithmic trading, blockchain, digital payments, AI-driven financial analysis, regulatory frameworks, and the evolving landscape of global financial markets.</div>
+      <div class="edu-tags">
+        <span class="edu-tag">FinTech</span>
+        <span class="edu-tag">Financial Markets</span>
+        <span class="edu-tag">AI &amp; Finance</span>
+        <span class="edu-tag">Blockchain</span>
+        <span class="edu-tag">Digital Payments</span>
+        <span class="edu-tag">Algorithmic Trading</span>
+        <span class="edu-tag">Risk Management</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-icon">BA</div>
+    <div>
+      <div class="edu-degree">Undergraduate Degree in Finance / Accounting</div>
+      <div class="edu-school">Bachelor's Degree</div>
+      <div class="edu-desc">Strong academic foundation in financial accounting, management accounting, corporate finance, taxation, and business law — underpinning professional expertise in compliance and financial operations.</div>
+      <div class="edu-tags">
+        <span class="edu-tag">Financial Accounting</span>
+        <span class="edu-tag">Corporate Finance</span>
+        <span class="edu-tag">Taxation</span>
+        <span class="edu-tag">Business Law</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title" style="color:var(--navy)">Let's Connect</h2>
+    <p style="color:var(--text-muted); font-size:15px;">Open to finance and compliance opportunities. Feel free to reach out via any of the channels below.</p>
+    <div class="contact-grid">
+      <a class="contact-box" href="tel:+4407767941402">
+        <div class="contact-box-icon">☎</div>
+        <div class="contact-box-label">Phone</div>
+        <div class="contact-box-val">+44 07767 941 402</div>
+      </a>
+      <a class="contact-box" href="/cdn-cgi/l/email-protection#32465b40465a535c5b0305535f5b46535072555f535b5e1c515d5f">
+        <div class="contact-box-icon">✉</div>
+        <div class="contact-box-label">Email</div>
+        <div class="contact-box-val"><span class="__cf_email__" data-cfemail="42362b30362a232c2b7375232f2b36232002252f232b2e6c212d2f">[email&#160;protected]</span></div>
+      </a>
+      <a class="contact-box" href="https://www.linkedin.com/in/amitab-tirthani-57a934150/" target="_blank">
+        <div class="contact-box-icon">in</div>
+        <div class="contact-box-label"
